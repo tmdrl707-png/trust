@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>믿음의 금고 안내</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0C1330;--card:#18224D;--card2:#212D62;--line:rgba(255,255,255,.14);--fg:#F4F6FF;--mut:#B8C1E6;
+  --gold:#F4C24D;--gold2:#FFE39C;--o:#2CC8B5;--x:#F05A68;
+  --fd:'Black Han Sans','Pretendard','Apple SD Gothic Neo',sans-serif;--fb:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif}
+html,body{height:100%;overflow:hidden;background:#070B1E}
+body{font-family:var(--fb);color:var(--fg);word-break:keep-all;-webkit-tap-highlight-color:transparent;user-select:none}
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:center;overflow:hidden;
+  background:var(--bg);background-image:radial-gradient(1100px 620px at 50% -15%,#26346f 0%,rgba(12,19,48,0) 70%)}
+.s{position:absolute;inset:0;padding:60px 90px 80px;display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .45s}
+.s.on{opacity:1;pointer-events:auto}
+.r{opacity:0;transform:translateY(22px);transition:opacity .5s,transform .5s}
+.r.in{opacity:1;transform:none}
+h2{font-family:var(--fd);font-size:84px;line-height:1.12;margin-bottom:40px}
+h2 em{font-style:normal;color:var(--gold)}
+.o{color:var(--o)}.x{color:var(--x)}.g{color:var(--gold)}
+.big{font-size:44px;font-weight:800;line-height:1.45;text-align:center}
+.row{display:flex;gap:30px;flex:1;align-items:stretch}
+.card{background:var(--card);border:2px solid var(--line);border-radius:30px;padding:36px 34px;flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.card .ic{font-size:84px;line-height:1;margin-bottom:14px}
+.card h3{font-family:var(--fd);font-size:56px;line-height:1.15;margin-bottom:14px}
+.card p{font-size:36px;font-weight:700;line-height:1.4}
+.card .ex{margin-top:20px;font-size:32px;font-weight:700;color:var(--mut);line-height:1.35}
+.foot{position:absolute;left:90px;right:90px;bottom:26px;display:flex;gap:8px}
+.foot i{width:34px;height:8px;border-radius:9px;background:var(--card2)}
+.foot i.on{background:var(--gold)}
+/* 표지 */
+.cover{align-items:center;justify-content:center;text-align:center}
+.cover svg{width:260px;animation:float 3.2s ease-in-out infinite}
+.cover h1{font-family:var(--fd);font-size:170px;color:var(--gold);line-height:1.05;margin-top:10px}
+.cover .sub{font-size:52px;font-weight:800;margin-top:14px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+/* 흐름 */
+.flow{display:flex;align-items:stretch;gap:18px;flex:1}
+.step{flex:1;background:var(--card);border-radius:30px;padding:30px 20px;text-align:center;border:2px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+.step .n{width:90px;height:90px;border-radius:50%;background:var(--gold);color:#1a1300;font-family:var(--fd);font-size:50px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.step h3{font-family:var(--fd);font-size:52px;line-height:1.15}
+.step p{font-size:32px;font-weight:700;color:var(--mut);margin-top:12px;line-height:1.35}
+.arr{align-self:center;font-size:70px;color:var(--gold);font-weight:900}
+/* 금고 막대 */
+.bars{display:flex;align-items:flex-end;gap:40px;height:400px}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.bar .v{font-family:var(--fd);font-size:64px;color:var(--gold)}
+.bar .b{width:100%;border-radius:20px 20px 0 0;background:linear-gradient(180deg,var(--gold2),var(--gold))}
+.bar .l{margin-top:14px;font-size:38px;font-weight:800}
+.bar .t{font-size:34px;font-weight:800;color:var(--o)}
+.hd{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.np{display:flex;align-items:center;gap:14px;background:var(--card);border-radius:999px;padding:10px 14px;font-size:36px;font-weight:800;white-space:nowrap}
+.np b{color:var(--gold);font-family:var(--fd);font-size:44px}
+.np button{width:64px;height:64px;border-radius:50%;border:0;background:var(--card2);color:var(--fg);font-size:40px;font-weight:900;cursor:pointer}
+.bar .t{white-space:nowrap}
+.bar.sealb .b{background:repeating-linear-gradient(45deg,var(--gold),var(--gold) 16px,#d9a83a 16px,#d9a83a 32px)}
+.formula{margin-top:44px;text-align:center;font-size:54px;font-weight:900}
+.formula span{font-family:var(--fd);color:var(--gold)}
+/* O/X */
+.ox{display:flex;gap:60px;justify-content:center;flex:1;align-items:center}
+.ch{width:600px;border-radius:40px;padding:40px;text-align:center;border:4px solid}
+.ch .sym{font-family:var(--fd);font-size:240px;line-height:1}
+.ch h3{font-family:var(--fd);font-size:76px}
+.ch.o{background:rgba(44,200,181,.12);border-color:rgba(44,200,181,.6);color:var(--o)}
+.ch.x{background:rgba(240,90,104,.12);border-color:rgba(240,90,104,.6);color:var(--x)}
+/* 결과 */
+.res .c1{border-color:rgba(44,200,181,.7)}.res .c2{border-color:rgba(244,194,77,.7)}.res .c3{border-color:rgba(240,90,104,.75)}
+/* 계산기 */
+.calc{display:grid;grid-template-columns:520px 1fr;gap:40px;flex:1}
+.ctrl{background:var(--card);border-radius:30px;padding:34px;display:flex;flex-direction:column;justify-content:center;gap:30px}
+.ctrl .k{font-size:34px;font-weight:800;color:var(--mut);margin-bottom:10px}
+.stp{display:flex;align-items:center;gap:20px}
+.stp button{width:80px;height:80px;border-radius:50%;border:0;background:var(--card2);color:var(--fg);font-size:48px;font-weight:900;cursor:pointer}
+.stp button:active{transform:scale(.94)}
+.stp .v{font-family:var(--fd);font-size:64px;min-width:150px;text-align:center}
+.pot{font-size:40px;font-weight:900;color:var(--gold2)}
+.outw{display:flex;flex-direction:column;justify-content:center;gap:28px}
+.verdict{font-family:var(--fd);font-size:70px;line-height:1.1}
+.ppl{display:flex;gap:22px;flex-wrap:wrap}
+.pp{width:190px;border-radius:30px;padding:24px 10px;text-align:center;background:var(--card);border:3px solid var(--line)}
+.pp .sym{font-family:var(--fd);font-size:90px;line-height:1}
+.pp .c{font-family:var(--fd);font-size:60px;color:var(--gold);margin-top:6px}
+.pp .c.z{color:var(--mut)}
+.pp.isx{border-color:rgba(240,90,104,.7)}.pp.iso{border-color:rgba(44,200,181,.6)}
+/* 봉인 */
+.seal{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:24px}
+.seal .lock{font-size:170px;line-height:1}
+.seal .big{font-size:54px}
+/* 끝 */
+.end{align-items:center;justify-content:center;text-align:center}
+.end h2{font-size:140px;color:var(--gold);margin:0}
+.end p{font-size:56px;font-weight:800;margin-top:24px}
+#nav{position:fixed;right:14px;bottom:12px;display:flex;gap:8px;z-index:5}
+#nav button{width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:24px;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 표지 -->
+<section class="s cover">
+  <svg viewBox="0 0 120 120"><rect x="8" y="10" width="104" height="96" rx="14" fill="#2A3874" stroke="#F4C24D" stroke-width="4"/><circle cx="60" cy="58" r="31" fill="#1B2656" stroke="#F4C24D" stroke-width="4"/><circle cx="60" cy="58" r="8" fill="#F4C24D"/><g stroke="#F4C24D" stroke-width="5" stroke-linecap="round"><line x1="60" y1="34" x2="60" y2="46"/><line x1="60" y1="70" x2="60" y2="82"/><line x1="36" y1="58" x2="48" y2="58"/><line x1="72" y1="58" x2="84" y2="58"/></g><rect x="18" y="104" width="16" height="8" rx="3" fill="#F4C24D"/><rect x="86" y="104" width="16" height="8" rx="3" fill="#F4C24D"/></svg>
+  <h1>믿음의 금고</h1>
+  <div class="sub">함께 열까, 몰래 털까?</div>
+</section>
+
+<!-- 2 게임 순서 -->
+<section class="s">
+  <h2>게임은 <em>이렇게</em> 진행돼요</h2>
+  <div class="flow">
+    <div class="step r"><div class="n">1</div><h3>1~5라운드</h3><p>팀원과 함께<br><b class="o">O</b>냐 <b class="x">X</b>냐<br>코인 모으기</p></div>
+    <div class="arr r">›</div>
+    <div class="step r"><div class="n">2</div><h3>최종 라운드</h3><p>모은 코인을<br>팀에 투자할까,<br>지킬까?</p></div>
+    <div class="arr r">›</div>
+    <div class="step r"><div class="n">3</div><h3>🍪 간식</h3><p>반 친구의<br><b class="g">절반</b>이<br>간식을 받아요</p></div>
+  </div>
+</section>
+
+<!-- 3 한 라운드 -->
+<section class="s">
+  <h2>한 라운드는 <em>네 단계</em></h2>
+  <div class="flow">
+    <div class="step r"><div class="n">1</div><h3>팀 발표</h3><p>칠판에서<br>우리 팀 확인</p></div>
+    <div class="arr r">›</div>
+    <div class="step r"><div class="n">2</div><h3>작전 회의</h3><p>팀원을 찾아가<br>이야기하기</p></div>
+    <div class="arr r">›</div>
+    <div class="step r"><div class="n">3</div><h3>몰래 선택</h3><p>휴대폰으로<br><b class="o">O</b> 또는 <b class="x">X</b></p></div>
+    <div class="arr r">›</div>
+    <div class="step r"><div class="n">4</div><h3>결과 공개</h3><p>각자 받은<br>코인 공개</p></div>
+  </div>
+</section>
+
+<!-- 4 금고 -->
+<section class="s">
+  <div class="hd"><h2>라운드마다 <em>금고가 커져요</em></h2>
+    <div class="np" data-stop><button data-n="-1">−</button><span>우리 반 <b id="nN">20명</b></span><button data-n="1">+</button></div></div>
+  <div class="bars r">
+    <div class="bar"><div class="v">10</div><div class="b" style="height:15%"></div><div class="l">1라운드</div><div class="t">2명 짝 · <span class="tc" data-s="2">10팀</span></div></div>
+    <div class="bar"><div class="v">20</div><div class="b" style="height:30%"></div><div class="l">2라운드</div><div class="t">3명씩 · <span class="tc" data-s="3">10팀</span></div></div>
+    <div class="bar"><div class="v">30</div><div class="b" style="height:45%"></div><div class="l">3라운드</div><div class="t">3명씩 · <span class="tc" data-s="3">10팀</span></div></div>
+    <div class="bar"><div class="v">40</div><div class="b" style="height:60%"></div><div class="l">4라운드</div><div class="t">4명씩 · <span class="tc" data-s="4">10팀</span></div></div>
+    <div class="bar"><div class="v">50</div><div class="b" style="height:75%"></div><div class="l">5라운드</div><div class="t">4명씩 · <span class="tc" data-s="4">10팀</span></div></div>
+  </div>
+  <div class="formula r">우리 팀 금고 = <span>1인당 코인</span> × <span>팀 인원</span></div>
+</section>
+
+<!-- 5 선택 -->
+<section class="s">
+  <h2>선택은 <em>둘 중 하나</em></h2>
+  <div class="ox">
+    <div class="ch o r"><div class="sym">O</div><h3>다음 날<br>함께 연다</h3></div>
+    <div class="ch x r"><div class="sym">X</div><h3>오늘 밤<br>몰래 턴다</h3></div>
+  </div>
+  <p class="big r">모두 <b class="g">몰래</b> 고르고, 제출하면 <b class="g">바꿀 수 없어요</b></p>
+</section>
+
+<!-- 6 결과 -->
+<section class="s res">
+  <h2>금고는 <em>이렇게</em> 나눠요</h2>
+  <div class="row">
+    <div class="card c1 r"><div class="ic">🤝</div><h3 class="o">모두 O</h3><p>다음 날<br>함께 열어<br>똑같이 나눠요</p></div>
+    <div class="card c3 r"><div class="ic">🚨</div><h3 class="x">X가 있으면</h3><p>경보!<br>금고의 <span class="x">절반</span>이<br>날아가요</p></div>
+    <div class="card c2 r"><div class="ic">🕵️</div><h3 class="g">남은 절반</h3><p><span class="x">X</span>끼리<br>똑같이 나눠요<br><span class="o">O는 0</span></p></div>
+  </div>
+</section>
+
+<!-- 7 계산 -->
+<section class="s">
+  <h2>직접 <em>계산</em>해 보기</h2>
+  <div class="calc">
+    <div class="ctrl" data-stop>
+      <div><div class="k">라운드</div><div class="stp"><button data-c="r" data-d="-1">−</button><span class="v" id="cR">1R</span><button data-c="r" data-d="1">+</button></div></div>
+      <div><div class="k">X를 고른 사람</div><div class="stp"><button data-c="x" data-d="-1">−</button><span class="v x" id="cX">1명</span><button data-c="x" data-d="1">+</button></div></div>
+      <div class="pot" id="cPot"></div>
+    </div>
+    <div class="outw">
+      <div class="verdict" id="cV"></div>
+      <div class="ppl" id="cP"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 비밀 라운드 -->
+<section class="s">
+  <h2><em>비밀</em> 라운드</h2>
+  <div class="seal">
+    <div class="lock r">🔒</div>
+    <p class="big r">선생님이 <b class="g">비밀 라운드</b>로 정하면<br>칠판에 결과가 <b class="g">안 보여요</b></p>
+    <p class="big r">내 결과는 <b class="g">내 휴대폰에서만</b> 보여요</p>
+    <p class="big r">누가 털었는지는<br><b class="g">게임이 모두 끝날 때</b> 공개!</p>
+  </div>
+</section>
+
+<!-- 12 참여 방법 -->
+<section class="s">
+  <h2>휴대폰으로 <em>참여</em>하기</h2>
+  <div class="row">
+    <div class="card r"><div class="ic">📱</div><h3>입장</h3><p>QR 찍고<br>이름 입력</p></div>
+    <div class="card r"><div class="ic">🗣️</div><h3>대화</h3><p>휴대폰은 넣고<br>팀원 찾아가기</p></div>
+    <div class="card r"><div class="ic">🤫</div><h3>선택</h3><p>자리에서<br>몰래 누르기</p></div>
+  </div>
+</section>
+
+<!-- 13 약속 -->
+<section class="s">
+  <h2>시작하기 전에 <em>약속</em></h2>
+  <div class="row">
+    <div class="card r"><div class="ic">🎭</div><h3>배신은 전략</h3><p>게임이 끝나면<br>뒤끝 없기!</p></div>
+    <div class="card r"><div class="ic">🙊</div><h3>놀리지 않기</h3><p>누가 X를 했든<br>웃으며 넘기기</p></div>
+    <div class="card r"><div class="ic">📵</div><h3>화면 보지 않기</h3><p>남의 휴대폰은<br>보지 않기</p></div>
+  </div>
+</section>
+
+<!-- 14 시작 -->
+<section class="s end">
+  <h2 class="r">금고를 열 시간!</h2>
+  <p class="r"><b class="o">함께 열</b> 건가요, <b class="x">몰래 털</b> 건가요?</p>
+</section>
+
+<div class="foot" id="dots"></div>
+</div>
+<div id="nav"><button id="prev" aria-label="이전">‹</button><button id="nextb" aria-label="다음">›</button></div>
+
+<script>
+const stage=document.getElementById('stage');
+const slides=[...document.querySelectorAll('.s')];
+let cur=0;
+function fit(){ const s=Math.min(innerWidth/1600, innerHeight/900); stage.style.transform=`translate(-50%,-50%) scale(${s})`; }
+addEventListener('resize',fit); fit();
+document.getElementById('dots').innerHTML=slides.map(()=>'<i></i>').join('');
+function show(i, back){
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,k)=>{ s.classList.toggle('on',k===cur); s.querySelectorAll('.r').forEach(r=>r.classList.toggle('in', k===cur && back)); });
+  document.querySelectorAll('#dots i').forEach((d,k)=>d.classList.toggle('on',k<=cur));
+  location.hash=cur+1;
+}
+function fwd(){ const hidden=slides[cur].querySelector('.r:not(.in)'); if(hidden) hidden.classList.add('in'); else if(cur<slides.length-1) show(cur+1,false); }
+function bwd(){ const shown=[...slides[cur].querySelectorAll('.r.in')]; if(shown.length) shown[shown.length-1].classList.remove('in'); else if(cur>0) show(cur-1,true); }
+stage.addEventListener('click',e=>{ if(e.target.closest('[data-stop]')) return; fwd(); });
+document.getElementById('nextb').onclick=fwd; document.getElementById('prev').onclick=bwd;
+addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){ e.preventDefault(); fwd(); }
+  if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){ e.preventDefault(); bwd(); }
+});
+let tx=null;
+addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; },{passive:true});
+addEventListener('touchend',e=>{ if(tx===null) return; const d=e.changedTouches[0].clientX-tx; if(Math.abs(d)>50){ d<0?fwd():bwd(); } tx=null; });
+// 계산 체험: 라운드를 고르면 그 라운드의 팀 인원으로 계산
+const ST=[10,20,30,40,50], SZ=[2,3,3,4,4], C={r:1,x:1};
+// 인원을 고르면 라운드별 팀 수가 바뀜 (게임과 같은 방식으로 나눔)
+let NP=20;
+function sizesFor(n,s){ let t=Math.ceil(n/s); while(t>1 && Math.floor(n/t)<2) t--; return t; }
+function teamPlan(N){
+  let best=null;
+  for (let t=0; 3*t<=N; t++){                       // t: 3명 팀 수, d: 2명 짝 수
+    if ((N-3*t)%2) continue; const d=(N-3*t)/2;
+    for (let s=0; s<=t; s++){                       // s: 합치지 않는 3명 팀 수
+      const m=t-s; if (d<m || (d-m)%2) continue;
+      if (!best || s<best.s || (s===best.s && t<best.t)) best={t, d, s, m, dd:(d-m)/2};
+      break;
+    }
+  }
+  if (!best) return {r1:[N], fin:[N], solo:0};
+  const fin=[...Array(best.m).fill(5), ...Array(best.dd).fill(4), ...Array(best.s).fill(3)];
+  return {r1:[...Array(best.d).fill(2), ...Array(best.t).fill(3)], fin, solo:best.s, ...best};
+}
+function teamsUpd(){ document.getElementById('nN').textContent=NP+'명'; document.querySelectorAll('.tc').forEach(e=>e.textContent=(e.dataset.s==='2'?teamPlan(NP).r1.length:sizesFor(NP,+e.dataset.s))+'팀'); }
+document.querySelectorAll('[data-n]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); NP=Math.min(30,Math.max(3,NP+(+b.dataset.n))); teamsUpd(); });
+teamsUpd();
+function calc(){
+  C.r=Math.min(5,Math.max(1,C.r)); const n=SZ[C.r-1]; C.x=Math.min(n,Math.max(0,C.x));
+  const st=ST[C.r-1], pot=st*n;
+  document.getElementById('cR').textContent=C.r+'R'; document.getElementById('cX').textContent=C.x+'명';
+  const half=Math.floor(pot/2);
+  document.getElementById('cPot').innerHTML=`🪙 ${n}명 팀 금고<br>${st} × ${n} = ${pot}코인${C.x?`<br><span class="x">🚨 경보! 남은 절반 ${half}코인</span>`:''}`;
+  let v,coin;
+  if(C.x===0){ v='<span class="o">🤝 모두 함께 열었다!</span>'; coin=()=>st; }
+  else { const e=Math.floor(half/C.x); v=`<span class="x">🕵️ ${C.x===1?'혼자':C.x===n?'모두':'여럿이'} 털었다!</span>`; coin=k=>k<C.x?e:0; }
+  document.getElementById('cV').innerHTML=v;
+  document.getElementById('cP').innerHTML=Array.from({length:n},(_,k)=>{ const isx=k<C.x, c=coin(k); return `<div class="pp ${isx?'isx':'iso'}"><div class="sym ${isx?'x':'o'}">${isx?'X':'O'}</div><div class="c ${c?'':'z'}">${c?'+'+c:'0'}</div></div>`; }).join('');
+}
+document.querySelectorAll('[data-c]').forEach(b=>b.onclick=e=>{ e.stopPropagation(); C[b.dataset.c]+= +b.dataset.d; calc(); });
+calc();
+show(Math.max(0,(parseInt(location.hash.slice(1))||1)-1), false);
+</script>
+</body>
+</html>
