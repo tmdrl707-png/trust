@@ -232,14 +232,14 @@ body.board{overflow:hidden}
 .rj{display:flex;align-items:center;gap:.7em;background:#2b1f4d;border:2px solid var(--gold);border-radius:1em;padding:.6em .8em .6em 1.1em;box-shadow:0 10px 40px rgba(0,0,0,.5);animation:pop .3s both}
 .rj span{font-weight:700}.rj .btn{padding:.45em .9em}
 .tbars{display:grid;gap:.7em;margin-top:1em}
-.tbar{display:grid;grid-template-columns:16em 1fr 7em;gap:1em;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:.9em;padding:.6em 1em;animation:rise .6s both;animation-delay:var(--d)}
+.tbar{display:grid;grid-template-columns:16em 1fr 9em;gap:1em;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:.9em;padding:.6em 1em;animation:rise .6s both;animation-delay:var(--d)}
 .tbar.win{animation:rise .6s both,winhl .45s both;animation-delay:var(--d),calc(var(--d) + 1.25s)}
 @keyframes winhl{from{border-color:var(--line);box-shadow:none}to{border-color:var(--gold);box-shadow:0 0 0 3px rgba(244,194,77,.3)}}
 .tb-n b{font-family:var(--fb);font-weight:900;font-size:1.4em;margin-right:.4em}.tb-n span{color:var(--mut);font-weight:600;font-size:.95em}
 .tb-b{height:1.4em;background:var(--card2);border-radius:99px;overflow:hidden}
 .tb-b i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:99px;animation:growx 1.2s both;animation-delay:var(--d)}
 @keyframes growx{from{transform:scaleX(0);transform-origin:left}to{transform:scaleX(1);transform-origin:left}}
-.tb-v{font-family:var(--fd);font-size:1.6em;color:var(--gold);text-align:right}
+.tb-v{white-space:nowrap;font-family:var(--fd);font-size:1.6em;color:var(--gold);text-align:right}
 .wteam{text-align:center;font-weight:800;font-size:1.4em;background:rgba(244,194,77,.14);border:2px solid var(--gold);border-radius:1em;padding:.5em 1em;margin:.4em auto 1em;max-width:60em}
 .rk2{display:grid;grid-template-columns:repeat(auto-fill,minmax(13em,1fr));gap:.45em}
 .rk2>div{background:var(--card);border-radius:.6em;padding:.4em .8em;display:flex;gap:.6em;font-weight:700}
@@ -264,6 +264,8 @@ body.board{overflow:hidden}
 .rk3>div:not(.new){animation:none}.rk3>div.new{animation:pop .45s both}
 .rk3 .n{color:var(--mut);min-width:2.4em}.rk3 .sn .n{color:var(--gold2)}.rk3 .c{margin-left:auto;color:var(--gold)}
 .rk3 .cut2{grid-column:1/-1;justify-content:center;background:var(--gold);color:#1a1300;font-family:var(--fd);font-weight:400;font-size:1.1em;border-radius:.5em;padding:.35em;margin:.25em 0;opacity:1;animation:pop .5s both}
+.tienote{text-align:center;font-family:var(--fd);font-size:1.8em;color:#1a1300;background:var(--gold);border-radius:.6em;padding:.3em .8em;margin:.8em auto 0;max-width:40em;animation:pop .5s 2.4s both}
+.teams.rmt{display:flex;justify-content:center;align-items:center;gap:2em}.rmt .tc{width:22em}.rmt .vs{font-family:var(--fd);font-size:3em;color:var(--gold);align-self:center}
 .tsn{margin-top:.4em;font-weight:800;color:var(--gold2)}
 .invv{font-family:var(--fd);font-size:3.6rem;color:var(--gold);margin:6px 0}
 .inv1{display:flex;align-items:center;justify-content:center;gap:14px;margin:4px 0 0}
@@ -339,7 +341,7 @@ const FIREBASE_CONFIG = null;   // 체험판: 서버 없이 이 브라우저 안
 
 const DEMO = true;                     // demo.html에서는 true (서버 없이 봇과 한 판)
 const TEACHER_PW = '0815';             // 선생님 메뉴 비밀번호
-const RULE_VERSION = 'v1.9 (2026-10-26)'; // 평가용 기록(응답 시간·재입장·개인 순위·O/X 횟수 등, 엑셀 '평가용' 시트) · v1.9: 간식 = 우승팀 + 나머지 인원 순위 절반, 개인 순위 1위부터 한 명씩 공개 · v1.8.1: 투자 화면 1코인 조절(− + 꾹 누르기, 끌기 막대) · v1.8: 투자 1코인 단위, 최종 결과 한 팀씩 공개, 개인 순위 절반 표시 · v1.7: 방 번호 없이 이름만 입장, 같은 이름으로 다시 오면 이어서 · v1.6: O/X 5라운드(10·20·30·40·50, 2·3·3·4·4명) + 최종, 기본 비밀 라운드 4라운드 · v1.5: X가 한 명이라도 있으면 경보 → 금고 절반이 날아가고 남은 절반을 X끼리 나눔(O는 0), 라운드마다 코인 순위 · v1.4: 라운드별 코인·비밀 라운드(여러 개 가능)를 선생님이 설정(기록에 stakes·seals 저장, 기본 10·20·30·40 / 3라운드) · v1.3: 칭호는 해당자가 딱 1명일 때만 · v1.3: 칭호는 해당자가 딱 1명일 때만 · 규칙이 바뀌면 올리기: 1R 짝수 개의 2명 짝(필요시 3명)·2~4R 3·3·4명, 경보 시 O끼리, 3R 본인만, 최종 = 1R 두 팀 합쳐 4~5명(코인 균형)
+const RULE_VERSION = 'v1.10 (2026-10-26)'; // v1.10: 최종 1등 동점이면 동점 팀끼리 남은 코인으로 재경기 · 평가용 기록(응답 시간·재입장·개인 순위·O/X 횟수 등, 엑셀 '평가용' 시트) · v1.9: 간식 = 우승팀 + 나머지 인원 순위 절반, 개인 순위 1위부터 한 명씩 공개 · v1.8.1: 투자 화면 1코인 조절(− + 꾹 누르기, 끌기 막대) · v1.8: 투자 1코인 단위, 최종 결과 한 팀씩 공개, 개인 순위 절반 표시 · v1.7: 방 번호 없이 이름만 입장, 같은 이름으로 다시 오면 이어서 · v1.6: O/X 5라운드(10·20·30·40·50, 2·3·3·4·4명) + 최종, 기본 비밀 라운드 4라운드 · v1.5: X가 한 명이라도 있으면 경보 → 금고 절반이 날아가고 남은 절반을 X끼리 나눔(O는 0), 라운드마다 코인 순위 · v1.4: 라운드별 코인·비밀 라운드(여러 개 가능)를 선생님이 설정(기록에 stakes·seals 저장, 기본 10·20·30·40 / 3라운드) · v1.3: 칭호는 해당자가 딱 1명일 때만 · v1.3: 칭호는 해당자가 딱 1명일 때만 · 규칙이 바뀌면 올리기: 1R 짝수 개의 2명 짝(필요시 3명)·2~4R 3·3·4명, 경보 시 O끼리, 3R 본인만, 최종 = 1R 두 팀 합쳐 4~5명(코인 균형)
 const PARAMS = new URLSearchParams(location.search);
 const LOCAL = DEMO || !FIREBASE_CONFIG || PARAMS.has('local');
 const ROOM = 'game';   // v1.7: 방은 하나뿐 — 방 번호 없이 이름만으로 입장
@@ -566,7 +568,12 @@ const coinsOf = (r,pid) => (R().coins && R().coins['r'+r] && R().coins['r'+r][pi
 const choiceOf = (r,pid) => (R().choices && R().choices['r'+r] && R().choices['r'+r][pid]);
 const isAuto = (r,pid) => !!(R().auto && R().auto['r'+r] && R().auto['r'+r][pid]);
 function totalOf(pid, all){ let s=0; for(let r=1;r<=NR;r++) if(all||revealed(r)) s+=coinsOf(r,pid)||0; return s; }
-const FIN = () => R().fin || null;                       // 최종 라운드 결과
+const FIN = () => R().fin || null;
+const rmOf = st => (st&&st.rm)||0;                                  // 0 = 최종 투자, k = k번째 재경기
+const invNow = () => { const k=rmOf(R().state); return k ? (((R().rematch||{})['k'+k]||{}).invest||{}) : (R().invest||{}); };
+const invPath = () => { const k=rmOf(R().state); return k ? `rematch/k${k}/invest` : 'invest'; };
+const invTeams = () => { const k=rmOf(R().state); return k ? ((((R().rematch||{})['k'+k]||{}).teams)||[]) : teamsOf(FR).map((t,i)=>i); };
+const invPlayers = () => invTeams().flatMap(i=>teamsOf(FR)[i]||[]);                       // 최종 라운드 결과
 const remOf = pid => FIN() ? ((FIN().rem||{})[pid]||0) : totalOf(pid,true);
 const invOf = pid => FIN() ? ((FIN().inv||{})[pid]||0) : 0;
 const snackOf = pid => FIN() ? ((FIN().snack||{})[pid]||'') : '';
@@ -601,7 +608,17 @@ function computeFinal(room){
     avg.push(t.length ? Math.round(sum/t.length*10)/10 : 0);
   });
   const best=Math.max(0,...avg);
-  const win = best>0 ? avg.map((v,i)=>v===best?i:-1).filter(i=>i>=0) : [];
+  let win = best>0 ? avg.map((v,i)=>v===best?i:-1).filter(i=>i>=0) : [], lastBest=best;
+  // v1.10: 1등 동점이면 동점 팀끼리 '남은 코인'으로 재경기(rematch/k1, k2 …). 재경기에서도 아무도 안 내면 공동 우승
+  const RM=room.rematch||{}, rms=[];
+  for (let k=1; RM['k'+k]; k++){
+    const ts=RM['k'+k].teams||[], q=RM['k'+k].invest||{};
+    const ra=ts.map(i=>{ const t=teams[i]||[]; let sm=0; t.forEach(p=>{ const a=Math.min(Math.max(0,Math.floor(+q[p]||0)), rem[p]); inv[p]+=a; rem[p]-=a; sm+=a; }); return t.length?Math.round(sm/t.length*10)/10:0; });
+    lastBest=Math.max(0,...ra);
+    win = lastBest>0 ? ts.filter((i,j)=>ra[j]===lastBest) : ts.slice();
+    rms.push({teams:ts, avg:ra, win:win.slice()});
+  }
+  const tie = win.length>1 && lastBest>0 && win.some(i=>(teams[i]||[]).some(p=>rem[p]>0));
   const winners=new Set(win.flatMap(i=>teams[i]));
   const snack={}; winners.forEach(p=>snack[p]='team');
   const others=all.filter(p=>!winners.has(p)).sort((a,b)=>rem[b]-rem[a]);
@@ -611,7 +628,7 @@ function computeFinal(room){
     cut = rem[others[slots-1]];
     others.forEach(p=>{ if (rem[p]>=cut && rem[p]>0) snack[p]='rank'; });   // 커트라인 동점은 모두 포함, 0코인은 제외
   }
-  return {inv, rem, avg, win, snack, cut, slots, half:slots};
+  return {inv, rem, avg, win, snack, cut, slots, half:slots, tie, rms};
 }
 const fmtTime = ms => { const s=Math.max(0,Math.ceil(ms/1000)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); };
 
@@ -741,7 +758,7 @@ function renderBoard(fresh){
   let main='';
   if (st.phase==='lobby') main = boardLobby();
   else if (st.phase==='team') main = r===FR ? boardFinalTeam('team') : boardTeam(r);
-  else if (st.phase==='invest') main = boardFinalTeam('invest');
+  else if (st.phase==='invest') main = rmOf(st) ? boardRematch() : boardFinalTeam('invest');
   else if (st.phase==='choose') main = boardChoose(r);
   else if (st.phase==='result') main = boardResult(r, st.step||0);
   else if (st.phase==='final' && (st.step||0)===0 && trOf(st) < teamsOf(FR).length) main = boardTeamOne(trOf(st));
@@ -904,15 +921,31 @@ function boardFinalTeam(mode){
   return roundHead(FR, right) + finalRules() + `<div class="teams" style="--tw:${tw}">${teams.map((t,i)=>`<div class="tc" style="--i:${i}"><div class="tc-h"><b>${i+1}팀</b>${t.length!==sizeMode(teams)?`<span class="pot sm">${t.length}명</span>`:''}</div><ul>${t.map(p=>
     mode==='invest' ? `<li class="${inv[p]!=null?'ok':'wait'}"><span>${esc(nameOf(p))}</span><em>${inv[p]!=null?'✓':'…'}</em></li>` : `<li><span>${esc(nameOf(p))}</span></li>`).join('')}</ul></div>`).join('')}</div>`;
 }
+function boardRematch(){
+  const k=rmOf(R().state), inv=invNow(), ts=invTeams(), F=FIN()||{}, teams=teamsOf(FR), all=invPlayers(), done=all.filter(p=>inv[p]!=null).length;
+  return `<div class="fin-h">⚔️ 동점! 재경기${k>1?` (${k}번째)`:''}</div><div class="fin-s">동점 팀끼리 <b class="g">남은 코인</b>으로 한 번 더 투자해요 · 팀원 평균이 높은 팀이 우승 · 제출 <b class="g">${done}</b>/${all.length}</div>
+  <div class="teams rmt" style="--tw:22em">${ts.map((i,j)=>`<div class="tc" style="--i:${j}"><div class="tc-h"><b>${i+1}팀</b></div><ul>${(teams[i]||[]).map(p=>`<li class="${inv[p]!=null?'ok':'wait'}"><span>${esc(nameOf(p))}</span><em>${inv[p]!=null?'✓':'…'}</em></li>`).join('')}</ul></div>`).join('<div class="vs">VS</div>')}</div>
+  <p class="q" style="text-align:center">다른 친구들은 재경기를 지켜봐요 👀</p>`;
+}
 function boardTeamWin(){
+  const F0=FIN(); if (F0 && (F0.rms||[]).length) return boardRematchWin();
   const F=FIN(); if(!F) return '';
   const teams=teamsOf(FR), avg=F.avg||[], win=F.win||[], max=Math.max(1,...avg);
   const order=teams.map((t,i)=>i).sort((a,b)=>(avg[b]||0)-(avg[a]||0));
   return `<div class="fin-h">🏆 우승팀 발표</div><div class="fin-s">팀원 1인당 평균 투자 코인</div>
   <div class="tbars">${order.map((i,k)=>{ const w=win.includes(i);
     return `<div class="tbar ${w?'win':''}" style="--d:${(order.length-1-k)*0.35}s"><div class="tb-n"><b>${i+1}팀</b><span>${teams[i].map(p=>esc(nameOf(p))).join(' · ')}</span></div>
-      <div class="tb-b"><i style="width:${Math.max(2,100*(avg[i]||0)/max)}%"></i></div><div class="tb-v">${avg[i]||0}${w?' <span class="stamp">🏆🍪</span>':''}</div></div>`; }).join('')}</div>
-  ${win.length?'':'<p class="q">아무 팀도 투자하지 않아 우승팀이 없어요!</p>'}`;
+      <div class="tb-b"><i style="width:${Math.max(2,100*(avg[i]||0)/max)}%"></i></div><div class="tb-v">${avg[i]||0}${w?(F.tie?' <span class="stamp">⚔️</span>':' <span class="stamp">🏆🍪</span>'):''}</div></div>`; }).join('')}</div>
+  ${win.length?'':'<p class="q">아무 팀도 투자하지 않아 우승팀이 없어요!</p>'}${F.tie?tieNote(win):''}`;
+}
+const tieNote = win => `<div class="tienote">⚔️ 1등 동점! ${win.map(i=>(i+1)+'팀').join(' · ')}은 <b>남은 코인</b>으로 재경기!</div>`;
+function boardRematchWin(){
+  const F=FIN(), teams=teamsOf(FR), last=F.rms[F.rms.length-1], k=F.rms.length, max=Math.max(1,...last.avg), win=F.win||[];
+  return `<div class="fin-h">⚔️ 재경기${k>1?` ${k}`:''} 결과</div><div class="fin-s">재경기에서 투자한 코인 · 팀원 1인당 평균 (처음 투자 평균 ${(F.avg||[])[last.teams[0]]??''} 동점)</div>
+  <div class="tbars">${last.teams.map((i,j)=>{ const w=win.includes(i)&&!F.tie;
+    return `<div class="tbar ${w?'win':''}" style="--d:${j*0.35}s"><div class="tb-n"><b>${i+1}팀</b><span>${teams[i].map(p=>esc(nameOf(p))).join(' · ')}</span></div>
+      <div class="tb-b"><i style="width:${Math.max(2,100*(last.avg[j]||0)/max)}%"></i></div><div class="tb-v">${last.avg[j]||0}${w?' <span class="stamp">🏆🍪</span>':''}</div></div>`; }).join('')}</div>
+  ${F.tie?tieNote(win):(win.length>1?`<div class="tienote">재경기에서 아무도 투자하지 않아 ${win.map(i=>(i+1)+'팀').join(' · ')} <b>공동 우승</b>!</div>`:`<div class="tienote">🏆 ${win[0]+1}팀 우승!</div>`)}`;
 }
 function boardTeamOne(i){
   const F=FIN(); if(!F) return '';
@@ -1015,13 +1048,14 @@ function nextLabel(){
   switch(st.phase){
     case 'lobby': return '▶ 게임 시작';
     case 'team': return r===FR ? '▶ 투자 시작' : '▶ 선택 시작';
-    case 'invest': { const inv=R().invest||{}, all=teamsOf(FR).flat(), a=all.filter(p=>inv[p]!=null).length; return a<all.length ? `▶ 투자 마감 (미제출 ${all.length-a}명은 0)` : '▶ 투자 마감'; }
+    case 'invest': { const inv=invNow(), all=invPlayers(), a=all.filter(p=>inv[p]!=null).length, w=rmOf(st)?'재경기 ':''; return a<all.length ? `▶ ${w}투자 마감 (미제출 ${all.length-a}명은 0)` : `▶ ${w}투자 마감`; }
     case 'choose': { const [a,b]=submittedCount(r); return a<b ? `▶ 결과 공개 (미제출 ${b-a}명은 O)` : '▶ 결과 공개'; }
     case 'result':
       if (!isSealed(r) && step===0) return '▶ 팝업 닫고 O·X 공개';
       if (!isSealed(r) && step===1) return '▶ 코인 순위';
       return r<NR ? `▶ ${r+1}라운드 팀 편성` : '▶ 최종 라운드';
-    case 'final': if (step===0 && trOf(st) < teamsOf(FR).length) { const tr=trOf(st), T=teamsOf(FR).length; return tr<T-1 ? `▶ ${tr+2}팀 공개` : '▶ 전체 결과 보기'; }
+    case 'final': if (step===0 && trOf(st) >= teamsOf(FR).length && (FIN()||{}).tie) return '▶ ⚔️ 재경기 투자 시작';
+      if (step===0 && trOf(st) < teamsOf(FR).length) { const tr=trOf(st), T=teamsOf(FR).length; return tr<T-1 ? `▶ ${tr+2}팀 공개` : '▶ 전체 결과 보기'; }
       if (step===2 && rvOf(st) < rankList().length) { const rv=rvOf(st), L=rankList(); return rv===0 ? `▶ ${L[0].r2}위 공개` : `▶ 다음 공개 (${L[rv].r2}위 · ${rv}/${L.length})`; }
       return [SEAL()?`▶ ${SEAL()}라운드 봉인 해제`:'▶ 개인 순위','▶ 개인 순위','▶ 칭호 수여','▶ 라운드 통계',''][step]||'';
   }
@@ -1030,7 +1064,7 @@ function nextLabel(){
 function boardBar(){
   const st=R().state||{};
   const nSn=FIN()?new Set([...Object.keys(FIN().snack||{}), ...((st.step||0)>=3?computeTitles().flatMap(T=>T.who.map(w=>w.p)):[])]).size:0;
-  const lbl = (st.phase==='final'&&nSn ? `🍪 간식 ${nSn}개` : '');
+  const lbl = (st.phase==='final'&&nSn&&!FIN().tie ? `🍪 간식 ${nSn}개` : '');
   const talkBtn = st.phase==='team' ? `<button class="btn" data-a="talk" title="대화 시간 ${st.talkEnd?'다시 ':''}시작">⏱ ${fmtTime(((R().cfg&&R().cfg.talk)||90)*1000)}${st.talkEnd?' 다시':''}</button>` : '';
   const nl = nextLabel(), nh=(R().hist||[]).length;
   return `<footer class="B-bar"><span class="lbl">${lbl}</span>${talkBtn}
@@ -1071,7 +1105,7 @@ function downloadCSV(){
 
 // ===== 진행 (선생님) =====
 // 되돌리기용 스냅숏: 게임 진행에 쓰는 칸만 저장 (학생 명단은 그대로)
-const SNAP_KEYS=['state','teams','choices','auto','coins','res','revealed','invest','fin','ctime'];
+const SNAP_KEYS=['state','teams','choices','auto','coins','res','revealed','invest','fin','ctime','rematch'];
 function snapshot(){ const room=R(), o={}; SNAP_KEYS.forEach(k=>o[k]=room[k]===undefined?null:room[k]); return JSON.stringify(o); }
 const histWith = () => [...(R().hist||[]).slice(-7), snapshot()];      // 최근 8단계까지
 // 결과가 칠판 연출보다 휴대폰에 먼저 보이지 않도록, 휴대폰은 이 시각 뒤에 공개
@@ -1093,7 +1127,7 @@ async function next(){
     if (a<b && !(await ask(`아직 <b>${b-a}명</b>이 선택하지 않았어요.<br>넘어가면 미제출은 <b class="o">O</b>로 처리돼요.`, '넘어가기', '기다리기'))) return;
   }
   if (st.phase==='invest') {
-    const inv=room.invest||{}, all=teamsOf(FR).flat(), miss=all.filter(p=>inv[p]==null).length;
+    const inv=invNow(), all=invPlayers(), miss=all.filter(p=>inv[p]==null).length;
     if (miss && !(await ask(`아직 <b>${miss}명</b>이 투자하지 않았어요.<br>넘어가면 미제출은 <b>투자 0</b>으로 처리돼요.`, '넘어가기', '기다리기'))) return;
   }
   if (st.phase==='final' && (st.step||0)>=4) return;
@@ -1116,13 +1150,17 @@ async function next(){
     } else if (st.phase==='result') {
       await startRound(r+1, H);              // 마지막(NR) 라운드 뒤에는 최종 라운드(1라운드 짝 두 쌍씩, 코인이 비슷한 4명 팀)
     } else if (st.phase==='invest') {
-      await DB.update(base, {...H, 'fin':computeFinal(room), 'state/phase':'final', 'state/step':0, 'state/tr':0, 'state/at':0});   // 팀별로 한 팀씩 공개(tr) → 전체 결과
+      if (rmOf(st)) await DB.update(base, {...H, 'fin':computeFinal(room), 'state/phase':'final', 'state/step':0, 'state/tr':teamsOf(FR).length, 'state/at':now()+2500});   // 재경기 결과는 바로 비교 막대로
+      else await DB.update(base, {...H, 'fin':computeFinal(room), 'state/phase':'final', 'state/step':0, 'state/tr':0, 'state/at':0});   // 팀별로 한 팀씩 공개(tr) → 전체 결과
       saveLog();
     } else if (st.phase==='final' && (st.step||0)===0 && trOf(st) < teamsOf(FR).length) {
       const tr=trOf(st)+1, T=teamsOf(FR).length;
       await DB.update(base, {...H, 'state/tr':tr, 'state/at': tr>=T ? now()+revealDelay('final',FR,0) : 0});
     } else if (st.phase==='final' && (st.step||0)===2 && rvOf(st) < rankList().length) {
       await DB.update(base, {...H, 'state/rv':rvOf(st)+1});   // 개인 순위를 위에서부터 한 명씩
+    } else if (st.phase==='final' && (st.step||0)===0 && (FIN()||{}).tie) {
+      const k=Object.keys(room.rematch||{}).length+1;   // 동점 → 동점 팀끼리 재경기
+      await DB.update(base, {...H, ['rematch/k'+k]:{teams:FIN().win.slice(), at:now()}, 'state/phase':'invest', 'state/rm':k, 'state/at':0, ['openAt/rm'+k]:now()});
     } else if (st.phase==='final') {
       let step=(st.step||0)+1;
       if (step===1 && !SEAL()) step=2;       // 비밀 라운드가 없으면 봉인 해제 단계를 건너뜀
@@ -1176,7 +1214,7 @@ function saveLog(){
     for (let r=1;r<=FR;r++) rounds['r'+r]={teams:(teamsOf(r)||[]).map(t=>t.map(nameOf)), res:(room.res&&room.res['r'+r])||null};
     DB.set('logs/'+stamp+'_'+App.code, {game:'trust', ruleVersion:RULE_VERSION, date:d.toISOString(), room:App.code, n:Object.keys(players).length,
       sizes:(room.cfg&&room.cfg.sizes)||[], stakes:RS.map(r=>stakeIn(room,r)), seals:sealsIn(room), test:LOCAL, undos:room.undos||0, rounds,
-      final:{teamAvg:(FIN()||{}).avg||[], winTeams:((FIN()||{}).win||[]).map(i=>i+1), cut:(FIN()||{}).cut??null},
+      final:{teamAvg:(FIN()||{}).avg||[], winTeams:((FIN()||{}).win||[]).map(i=>i+1), cut:(FIN()||{}).cut??null, rematch:((FIN()||{}).rms||[]).map(x=>({teams:x.teams.map(i=>i+1), avg:x.avg, win:x.win.map(i=>i+1)}))},
       titles:titles.map(T=>({title:T.t, value:T.best, who:T.who.map(w=>w.name), tie:T.tie||0})), players});
   } catch(e) { console.error(e); } }, 800);
 }
@@ -1202,6 +1240,8 @@ function downloadXLSX(){
     tm.push([r, stakeOf(r), i+1, t.length, stakeOf(r)*t.length, KN[x.kind]||'', x.xs??'', t.map(p=>`${nameOf(p)} ${choiceOf(r,p)||'-'}·${coinsOf(r,p)??'-'}`).join(', ')]); });
   const fin=[['팀','인원','팀원 (모은 코인 → 투자)','평균 투자','우승']];
   teamsOf(FR).forEach((t,i)=>fin.push([i+1, t.length, t.map(p=>`${nameOf(p)} ${totalOf(p,true)}→${invOf(p)}`).join(', '), F?(F.avg||[])[i]:'', F&&(F.win||[]).includes(i)?'🏆':'']));
+  if (F) (F.rms||[]).forEach((x,k)=>{ const q=((room.rematch||{})['k'+(k+1)]||{}).invest||{}; fin.push([],[`⚔️ 재경기 ${k+1}`,'','팀원 (재경기 투자)','평균','우승']);
+    x.teams.forEach((i,j)=>fin.push([i+1, teamsOf(FR)[i].length, teamsOf(FR)[i].map(p=>`${nameOf(p)} ${Math.min(+q[p]||0, 1e9)}`).join(', '), x.avg[j], x.win.includes(i)&&!(k===F.rms.length-1&&F.tie)?'🏆':''])); });
   const ev=[['이름','전체 순위','개인 순위 (우승팀 제외)','간식','O 횟수','X 횟수','미제출','함께 연 횟수','털어서 받은 최대','털린 횟수(O인데 경보)','모은 코인','투자','투자 비율%','남은 코인','최종 팀','팀 평균 투자','우승','투자 미제출','평균 응답(초)',...RS.map(r=>r+'R 응답(초)'),'투자 응답(초)',...RS.map(r=>r+'R 팀 결과'),'재입장','칭호']];
   list.forEach(e=>{ const v=evalOf(e.p); ev.push([e.name, e.rank, v.persRank===''?'-':v.persRank+'/'+v.persN, ({team:'우승팀',rank:'순위'}[v.snack]||''), v.oCount, v.xCount, v.missed, v.shares, v.bestSteal, v.robbed,
     v.gathered, v.invest, v.investPct, v.remain, v.finalTeam||'', v.teamAvg, v.win?'🏆':'', v.invMissed?'미제출':'', v.avgSec??'', ...v.secs.map(x=>x??''), v.invSec??'', ...v.kinds, v.rejoin, titles.filter(T=>T.who.some(w=>w.p===e.p)).map(T=>T.t).join(', ')]); });
@@ -1220,13 +1260,13 @@ function runBots(r){
   });
 }
 function runBotsInvest(){
-  const inv=R().invest||{};
-  teamsOf(FR).flat().forEach(p=>{
-    const pl=R().players[p]; const k='inv:'+p;
+  const inv=invNow(), rk=rmOf(R().state), path=invPath();
+  invPlayers().forEach(p=>{
+    const pl=R().players[p]; const k='inv'+rk+':'+p;
     if (!pl || !pl.bot || inv[p]!=null || App.botSched.has(k)) return;
     App.botSched.add(k);
-    const have=totalOf(p,true), pick=[0, Math.floor(have/20)*10, have, 9999][Math.floor(Math.random()*4)];
-    setTimeout(()=>{ if((R().state||{}).phase==='invest') DB.set(`rooms/${App.code}/invest/${p}`, pick); }, 600+Math.random()*3000);
+    const have=rk?remOf(p):totalOf(p,true), pick=[0, Math.floor(have/20)*10, have, 9999][Math.floor(Math.random()*4)];
+    setTimeout(()=>{ const s2=R().state||{}; if(s2.phase==='invest' && rmOf(s2)===rk) DB.set(`rooms/${App.code}/${path}/${p}`, pick); }, 600+Math.random()*3000);
   });
 }
 async function addBots(n){
@@ -1290,17 +1330,18 @@ function phoneFinalTeam(){
 }
 function phoneInvest(){
   const ti=teamIdx(FR,App.pid); if (ti<0) return `<div class="rbox"><div class="rt">이번 라운드는 쉬어요</div></div>`;
-  const req=R().invest||{};
-  if (req[App.pid]!=null) return `<div class="done"><div class="chk">✓</div><div class="rt">투자 완료</div><p class="tip">투자한 코인은 결과 발표 때까지 비밀이에요.</p></div>${mateList(FR)}`;
-  const vis=totalOf(App.pid,true), max=vis;
+  const k=rmOf(R().state), req=invNow();
+  if (k && !invTeams().includes(ti)) return `<div class="rbox" style="padding:40px 18px"><div class="rankbig">⚔️</div><div class="rt">동점 팀 재경기 중</div><p class="tip">${invTeams().map(i=>(i+1)+'팀').join(' · ')}이 남은 코인으로 다시 투자하고 있어요.<br>칠판을 보며 기다려요!</p></div>`;
+  if (req[App.pid]!=null) return `<div class="done"><div class="chk">✓</div><div class="rt">${k?'재경기 ':''}투자 완료</div><p class="tip">투자한 코인은 결과 발표 때까지 비밀이에요.</p></div>${mateList(FR)}`;
+  const vis=k ? remOf(App.pid) : totalOf(App.pid,true), max=vis;
   if (App.inv==null) App.inv=0;
   App.inv=Math.max(0,Math.min(max,App.inv));
   const all=App.inv>=max && max>0;
   if (App.sel==='inv') return `<div class="conf"><div class="sym g">${all?'전부':App.inv}</div><div class="rt">${all?'가진 코인 전부':App.inv+'코인'} 투자</div>
       <p>이대로 제출할까요?<br>제출하면 바꿀 수 없어요.</p>
       <div class="row"><button class="btn" data-a="cancel">다시 정하기</button><button class="btn gold" data-a="inv-submit">제출하기</button></div></div>`;
-  return `<div class="rbox"><div class="rn">FINAL · ${ti+1}팀</div><div class="rt">얼마를 투자할까?</div>
-    <p class="tip">내 코인: <b class="g">${vis}</b></p>
+  return `<div class="rbox"><div class="rn">${k?'⚔️ 재경기':'FINAL'} · ${ti+1}팀</div><div class="rt">${k?'동점! 한 번 더 투자':'얼마를 투자할까?'}</div>
+    <p class="tip">${k?'남은 ':'내 '}코인: <b class="g">${vis}</b>${k?'<br>팀원 평균이 더 높은 팀이 우승!':''}</p>
     <div class="inv1"><button class="pm" data-a="inv-d" data-d="-1" data-hold aria-label="1코인 빼기">−</button><div class="invv" id="invV">${all?'전부':App.inv}</div><button class="pm" data-a="inv-d" data-d="1" data-hold aria-label="1코인 더하기">+</button></div>
     <p class="invh">− + 버튼을 꾹 누르면 빠르게 바뀌어요</p>
     <input type="range" class="invs" id="invR" min="0" max="${max}" step="1" value="${App.inv}" style="--p:${max?100*App.inv/max:0}%" aria-label="투자 코인">
@@ -1378,7 +1419,9 @@ function phoneFinal(){
   const F=FIN(), st=R().state||{}, step=st.step||0; if(!F) return '';
   const ti=teamIdx(FR,App.pid), avg=F.avg||[], win=(F.win||[]).includes(ti);
   const order=avg.map((v,i)=>i).sort((a,b)=>avg[b]-avg[a]); const trank=order.indexOf(ti)+1;
-  let h=`<div class="rbox"><div class="rn">FINAL · ${ti+1}팀</div>${win?'<div class="rankbig">🏆</div><div class="rt">우승팀! 🍪 간식</div>':`<div class="rt">우리 팀 ${trank}위</div>`}
+  const rmt=(F.rms||[]).some(x=>x.teams.includes(ti)), tieMe=F.tie&&(F.win||[]).includes(ti);
+  if (tieMe) return `<div class="rbox"><div class="rn">FINAL · ${ti+1}팀</div><div class="rankbig">⚔️</div><div class="rt">1등 동점!</div><p class="tip">남은 코인으로 재경기를 해요.<br>선생님이 시작하면 다시 투자해요.</p></div>`;
+  let h=`<div class="rbox"><div class="rn">FINAL · ${ti+1}팀${rmt?' · ⚔️ 재경기':''}</div>${win?'<div class="rankbig">🏆</div><div class="rt">우승팀! 🍪 간식</div>':`<div class="rt">우리 팀 ${trank}위</div>`}
     <p class="tip">우리 팀 평균 투자 <b class="g">${avg[ti]||0}</b>${avg.length?` · 1위 팀 평균 ${Math.max(...avg)}`:''}</p></div>`;
   if (step>=1) SEALS().forEach(x=>{ h+=myResult(x,`🔓 ${x}라운드 봉인 해제`); });
   if (step>=2) {
@@ -1478,9 +1521,9 @@ app.addEventListener('click', async e => {
     case 'inv-d': if (App.holdUsed) { App.holdUsed=false; return; } return setInv((App.inv||0)+(+b.dataset.d));
     case 'inv-set': return setInv(+b.dataset.v);
     case 'inv-ok': App.sel='inv'; return render();
-    case 'inv-submit': { const st=R().state||{}; if (st.phase!=='invest' || (R().invest||{})[App.pid]!=null) return;
-      const max=totalOf(App.pid,true), v=Math.min(App.inv||0, max);
-      try { await sureSet(`rooms/${App.code}/invest/${App.pid}`, v, 'invest'); App.sel=null; DB.set(`rooms/${App.code}/ctime/r${FR}/${App.pid}`, now()).catch(()=>{}); } catch(e){ toast('제출에 실패했어요. 다시 눌러 주세요.'); } return; }
+    case 'inv-submit': { const st=R().state||{}; if (st.phase!=='invest' || invNow()[App.pid]!=null) return;
+      const k=rmOf(st), max=k?remOf(App.pid):totalOf(App.pid,true), v=Math.min(App.inv||0, max);
+      try { await sureSet(`rooms/${App.code}/${invPath()}/${App.pid}`, v, 'invest'); App.sel=null; DB.set(`rooms/${App.code}/ctime/${k?'rm'+k:'r'+FR}/${App.pid}`, now()).catch(()=>{}); } catch(e){ toast('제출에 실패했어요. 다시 눌러 주세요.'); } return; }
     case 'hist': App.showHist=true; return render();
     case 'hist-close': App.showHist=false; return render();
     case 'rules': toast(((R().state||{}).round===FR) ? '팀 평균 투자 1위 팀 우승 · 나머지는 남은 코인 순위' : '모두 O → 똑같이 나눔 · X가 있으면 → 경보! 절반이 날아가고 X끼리 나눔, O는 0'); return;
