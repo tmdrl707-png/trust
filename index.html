@@ -143,6 +143,12 @@ body.board{overflow:hidden}
 .dot.on{background:var(--gold)}.dot.now{background:var(--gold2);animation:glow 1.6s infinite}
 .B-code{color:var(--mut);font-weight:700}
 .B-code b{color:var(--fg);font-size:1.25em;letter-spacing:.06em}
+.mqr{display:flex;align-items:center;gap:.55em;background:none;border:0;color:var(--mut);cursor:pointer;padding:0;margin:-.35em .4em -.35em -.6em;text-align:left;font:inherit;font-size:.85em;line-height:1.25}
+.mqr img{width:4.4em;height:4.4em;background:#fff;padding:.25em;border-radius:.35em;display:block}
+.mqr b{color:var(--gold)}
+.qrov{position:fixed;inset:0;z-index:150;background:rgba(5,8,20,.85);display:flex;align-items:center;justify-content:center;cursor:pointer;animation:rise .2s both;font-size:clamp(14px,1.3vw,30px);text-align:center}
+.qrov img{width:min(60vh,26em);height:min(60vh,26em);background:#fff;padding:1em;border-radius:1em}
+.qrov p{font-size:1.5em;font-weight:800;margin-top:.6em}.qrov b{color:var(--gold)}.qrov small{color:var(--mut)}
 .B-main{flex:1;overflow:hidden;position:relative;min-height:0}
 .B-bar{display:flex;align-items:center;gap:.7em;padding:.65em 1.4em;border-top:1px solid var(--line);background:rgba(0,0,0,.22)}
 .B-bar .lbl b{color:var(--fg);letter-spacing:.06em;font-size:1.15em}
@@ -351,7 +357,7 @@ const FIREBASE_CONFIG = {
 
 const DEMO = false;                    // demo.html에서는 true (서버 없이 봇과 한 판)
 const TEACHER_PW = '0815';             // 선생님 메뉴 비밀번호
-const RULE_VERSION = 'v1.10 (2026-10-26)'; // v1.10: 최종 1등 동점이면 동점 팀끼리 남은 코인으로 재경기 · 평가용 기록(응답 시간·재입장·개인 순위·O/X 횟수 등, 엑셀 '평가용' 시트) · v1.9: 간식 = 우승팀 + 나머지 인원 순위 절반, 개인 순위 1위부터 한 명씩 공개 · v1.8.1: 투자 화면 1코인 조절(− + 꾹 누르기, 끌기 막대) · v1.8: 투자 1코인 단위, 최종 결과 한 팀씩 공개, 개인 순위 절반 표시 · v1.7: 방 번호 없이 이름만 입장, 같은 이름으로 다시 오면 이어서 · v1.6: O/X 5라운드(10·20·30·40·50, 2·3·3·4·4명) + 최종, 기본 비밀 라운드 4라운드 · v1.5: X가 한 명이라도 있으면 경보 → 금고 절반이 날아가고 남은 절반을 X끼리 나눔(O는 0), 라운드마다 코인 순위 · v1.4: 라운드별 코인·비밀 라운드(여러 개 가능)를 선생님이 설정(기록에 stakes·seals 저장, 기본 10·20·30·40 / 3라운드) · v1.3: 칭호는 해당자가 딱 1명일 때만 · v1.3: 칭호는 해당자가 딱 1명일 때만 · 규칙이 바뀌면 올리기: 1R 짝수 개의 2명 짝(필요시 3명)·2~4R 3·3·4명, 경보 시 O끼리, 3R 본인만, 최종 = 1R 두 팀 합쳐 4~5명(코인 균형)
+const RULE_VERSION = 'v1.10.1 (2026-10-26)'; // v1.10.1: 칠판 막대에 재입장 QR · v1.10: 최종 1등 동점이면 동점 팀끼리 남은 코인으로 재경기 · 평가용 기록(응답 시간·재입장·개인 순위·O/X 횟수 등, 엑셀 '평가용' 시트) · v1.9: 간식 = 우승팀 + 나머지 인원 순위 절반, 개인 순위 1위부터 한 명씩 공개 · v1.8.1: 투자 화면 1코인 조절(− + 꾹 누르기, 끌기 막대) · v1.8: 투자 1코인 단위, 최종 결과 한 팀씩 공개, 개인 순위 절반 표시 · v1.7: 방 번호 없이 이름만 입장, 같은 이름으로 다시 오면 이어서 · v1.6: O/X 5라운드(10·20·30·40·50, 2·3·3·4·4명) + 최종, 기본 비밀 라운드 4라운드 · v1.5: X가 한 명이라도 있으면 경보 → 금고 절반이 날아가고 남은 절반을 X끼리 나눔(O는 0), 라운드마다 코인 순위 · v1.4: 라운드별 코인·비밀 라운드(여러 개 가능)를 선생님이 설정(기록에 stakes·seals 저장, 기본 10·20·30·40 / 3라운드) · v1.3: 칭호는 해당자가 딱 1명일 때만 · v1.3: 칭호는 해당자가 딱 1명일 때만 · 규칙이 바뀌면 올리기: 1R 짝수 개의 2명 짝(필요시 3명)·2~4R 3·3·4명, 경보 시 O끼리, 3R 본인만, 최종 = 1R 두 팀 합쳐 4~5명(코인 균형)
 const PARAMS = new URLSearchParams(location.search);
 const LOCAL = DEMO || !FIREBASE_CONFIG || PARAMS.has('local');
 const ROOM = 'game';   // v1.7: 방은 하나뿐 — 방 번호 없이 이름만으로 입장
@@ -778,7 +784,8 @@ function renderBoard(fresh){
     <main class="B-main"><div class="fit" id="fit">${main}</div></main>
     ${boardBar()}
   </div>
-  ${App.showRec ? recordsOverlay() : ''}`;
+  ${App.showRec ? recordsOverlay() : ''}
+  ${App.qrBig && st.phase!=='lobby' ? `<div class="qrov" data-a="qrbig"><div><img src="${qrSrc()}" alt="입장 QR"><p>QR을 찍고 <b>처음과 같은 이름</b>을 입력하면 이어서 해요</p><small>아무 곳이나 누르면 닫혀요</small></div></div>` : ''}`;
   if (st.phase==='lobby') drawQR();
   fitBoard();
 }
@@ -797,6 +804,18 @@ function fitBoard(){
 addEventListener('resize', ()=>{ if (App.mode==='host') fitBoard(); });
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(()=>{ if (App.mode==='host') fitBoard(); });
 function joinUrl(){ return location.origin + location.pathname + (LOCAL ? '?local=1' : ''); }
+// 게임 중 재입장용 작은 QR (칠판 아래 막대 왼쪽, 누르면 크게)
+function qrSrc(){
+  if (App.qrSrc) return App.qrSrc;
+  if (typeof QRCode==='undefined') return '';
+  try { const d=document.createElement('div'); new QRCode(d, {text:joinUrl(), width:300, height:300, correctLevel:QRCode.CorrectLevel.M});
+    const c=d.querySelector('canvas'); App.qrSrc = c ? c.toDataURL() : ((d.querySelector('img')||{}).src||''); } catch(e){ return ''; }
+  return App.qrSrc;
+}
+function miniQR(){
+  const src=qrSrc(); if (!src) return '';
+  return `<button class="mqr" data-a="qrbig" title="입장 QR 크게 보기"><img src="${src}" alt="입장 QR"><span>나갔다면<br><b>QR → 같은 이름</b></span></button>`;
+}
 function drawQR(){
   const box=$('#qr'); if(!box) return;
   if (typeof QRCode==='undefined') { box.textContent='QR을 불러오지 못했어요'; return; }
@@ -1077,7 +1096,7 @@ function boardBar(){
   const lbl = (st.phase==='final'&&nSn&&!FIN().tie ? `🍪 간식 ${nSn}개` : '');
   const talkBtn = st.phase==='team' ? `<button class="btn" data-a="talk" title="대화 시간 ${st.talkEnd?'다시 ':''}시작">⏱ ${fmtTime(((R().cfg&&R().cfg.talk)||90)*1000)}${st.talkEnd?' 다시':''}</button>` : '';
   const nl = nextLabel(), nh=(R().hist||[]).length;
-  return `<footer class="B-bar"><span class="lbl">${lbl}</span>${talkBtn}
+  return `<footer class="B-bar">${st.phase!=='lobby'&&!DEMO?miniQR():''}<span class="lbl">${lbl}</span>${talkBtn}
     ${nh?`<button class="btn" data-a="undo" title="이전 단계 (최근 8단계까지)">↩ 이전</button>`:''}
     ${st.phase!=='lobby'?'<button class="btn ic" data-a="rec" title="플레이어 기록">📋</button>':''}
     ${st.phase==='final'?'<button class="btn" data-a="xlsx">📊 게임 기록 내려받기(엑셀)</button>':''}
@@ -1535,6 +1554,7 @@ app.addEventListener('click', async e => {
       const k=rmOf(st), max=k?remOf(App.pid):totalOf(App.pid,true), v=Math.min(App.inv||0, max);
       try { await sureSet(`rooms/${App.code}/${invPath()}/${App.pid}`, v, 'invest'); App.sel=null; DB.set(`rooms/${App.code}/ctime/${k?'rm'+k:'r'+FR}/${App.pid}`, now()).catch(()=>{}); } catch(e){ toast('제출에 실패했어요. 다시 눌러 주세요.'); } return; }
     case 'hist': App.showHist=true; return render();
+    case 'qrbig': App.qrBig=!App.qrBig; return render();
     case 'hist-close': App.showHist=false; return render();
     case 'rules': toast(((R().state||{}).round===FR) ? '팀 평균 투자 1위 팀 우승 · 나머지는 남은 코인 순위' : '모두 O → 똑같이 나눔 · X가 있으면 → 경보! 절반이 날아가고 X끼리 나눔, O는 0'); return;
   }
